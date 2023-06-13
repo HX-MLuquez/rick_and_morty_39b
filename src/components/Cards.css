@@ -1,5 +1,14 @@
 .cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-content: space-around;
+    justify-items: center
 }
+
+
+@media screen and (max-width:825px){
+    .cards{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+} 

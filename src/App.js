@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 import Cards from "./components/Cards.jsx";
@@ -8,6 +8,10 @@ import axios from "axios";
 function App() {
   const [characters, setCharacters] = useState([]);
   // console.log(characters)
+  const [title, setTitle]= useState("Bienvenidos")
+  const seteandoTitle = (str)=>{
+    setTitle(str)
+  }
 
   function onSearch(id) {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
@@ -26,11 +30,12 @@ function App() {
     const newCharacters = characters.filter((ch) => ch.id !== Number(id));
     setCharacters(newCharacters);
   }
+
   return (
     <div className="App">
-      <div>Bienvenidos!!!!</div>
+      {/* <h1>{title}</h1> */}
       <NavBar onSearch={onSearch} />
-      <Cards characters={characters} onClose={onClose} />
+      <Cards characters={characters} onClose={onClose} seteandoTitle={seteandoTitle} />
     </div>
   );
 }
