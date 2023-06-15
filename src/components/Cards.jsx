@@ -5,6 +5,7 @@ export default function Cards({characters, onClose, seteandoTitle}) {
    console.log(characters)
   return (
     <div className="cards">
+      <h2>Estamos en el home y podemos mostrar y/o ver nuestras cards</h2>
       {
          characters?.map((char, index)=>{
             return <Card  key={char.id} char={char} onClose={onClose} seteandoTitle={seteandoTitle}/>
