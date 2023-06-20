@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import "./Login.css";
+import style from "../styles/Login.module.css";
 
 const regExEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 const regexPassword =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,10}/;
 
-export default function Login({login}) {
+export default function Login({ login }) {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -59,8 +59,8 @@ export default function Login({login}) {
         email: "",
         password: "",
       });
-      login(inputs)
-  
+      login(inputs);
+
       // navigate("/home");
     } else {
       return alert("Error");
@@ -69,32 +69,37 @@ export default function Login({login}) {
   return (
     console.log("--> ", inputs, inputsErrors),
     (
-      <div className="login">
+      <div className={style.login}>
         <form onSubmit={handleSubmit}>
           <h1>Bienvenidos!!!</h1>
-          <label>Email: </label>
-          <input
-            type="text"
-            key="email"
-            name="email"
-            value={inputs.email}
-            onChange={handleChange}
-          ></input>
-          <span>{inputsErrors?.email && inputsErrors.email}</span>
-          <hr></hr>
-          <label>Password: </label>
-          <input
-            type="password"
-            key="password"
-            name="password"
-            value={inputs.password}
-            onChange={handleChange}
-          ></input>
-          <span>{inputsErrors?.password && inputsErrors.password}</span>
+          <div className={style.inputs}>
+            <label>Email: </label>
+            <input
+              type="text"
+              key="email"
+              name="email"
+              value={inputs.email}
+              onChange={handleChange}
+            ></input>
+            <span>{inputsErrors?.email && inputsErrors.email}</span>
+            <hr></hr>
+            <label>Password: </label>
+            <input
+              type="password"
+              key="password"
+              name="password"
+              value={inputs.password}
+              onChange={handleChange}
+            ></input>
+            <span>{inputsErrors?.password && inputsErrors.password}</span>
+          </div>
           <hr></hr>
           {Object.keys(inputsErrors).length === 0 ? (
             <button type="submit">Ingresar</button>
           ) : null}
+
+          <Link to="/home">
+          <button>Ingresar</button></Link>
         </form>
       </div>
     )

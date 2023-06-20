@@ -2,7 +2,8 @@
     display: grid;
     grid-template-columns: repeat(5,1fr);
     justify-content: space-around;
-    justify-items: center
+    justify-items: center;
+    padding: 2px 40px;
 }
 
 

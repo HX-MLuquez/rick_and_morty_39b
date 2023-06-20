@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./SearchBar.css";
+import style from "../styles/SearchBar.module.css";
 export default function SearchBar({ onSearch }) {
   const [id, setId] = useState("");
 
@@ -20,7 +20,7 @@ export default function SearchBar({ onSearch }) {
   };
   return (
     // console.log("id--->", id),
-    <div className="search">
+    <div className={style.search}>
       <label>Insert to Id: </label>
       <input
         type="search"

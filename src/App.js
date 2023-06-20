@@ -64,7 +64,7 @@ function App() {
   return (
     console.log("access <<<>>>>>> ", access),
     (
-      <div className="App">
+      <>
         {/* <h1>{title}</h1> */}
         {pathname === "/" ? null : (
           <NavBar logout={logout} onSearch={onSearch} />
@@ -94,7 +94,7 @@ function App() {
       pathname.split("/")[1] !== `detail` ? (
         <ErrorNotFound />
       ) : null} */}
-      </div>
+      </>
     )
   );
 }

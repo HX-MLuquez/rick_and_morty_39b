@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./Card.css";
+import style from "../styles/Card.module.css";
 
 import { Link } from "react-router-dom";
 
@@ -18,11 +18,11 @@ export default function Card({ char, onClose, seteandoTitle }) {
   }, []); // willMount
 
   return (
-    <div className="card">
-      <div className="close">
+    <div className={style.card}>
+      <div className={style.close}>
         <button onClick={() => onClose(id)}>X</button>
       </div>
-      <div className="info">
+      <div className={style.info}>
         <Link to={`/detail/${id}`}>
           <h2>{name}</h2>
           {/* <h2>{status}</h2> */}

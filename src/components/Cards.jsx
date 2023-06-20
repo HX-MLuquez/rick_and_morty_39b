@@ -1,10 +1,10 @@
 import Card from "./Card";
-import './Cards.css'
+import style from '../styles/Cards.module.css'
 
 export default function Cards({characters, onClose, seteandoTitle}) {
    console.log(characters)
   return (
-    <div className="cards">
+    <div className={style.cards}>
       <h2>Estamos en el home y podemos mostrar y/o ver nuestras cards</h2>
       {
          characters?.map((char, index)=>{

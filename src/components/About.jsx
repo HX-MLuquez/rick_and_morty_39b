@@ -1,8 +1,9 @@
 import React from 'react'
+import style from '../styles/About.module.css'
 
 export default function About() {
   return (
-    <div>
+    <div className={style.about}>
         <h1>Soy Mauro, un dev en crecimiento</h1>
         <h2>actualmente estudio POO</h2>
         <p>React Hook useEffect has a missing dependency: 'seteandoTitle'. 
