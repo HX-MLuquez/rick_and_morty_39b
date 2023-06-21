@@ -10,8 +10,12 @@ import Login from "./components/Login";
 import About from "./components/About";
 import Detail from "./components/Detail";
 import ErrorNotFound from "./components/ErrorNotFound";
+import Favorites from "./components/Favorites";
 
-function App() {
+import { connect } from "react-redux";
+import { addFav, removeFav } from "./redux/actions";
+
+function App({ removeFav }) {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
   const EMAIL = "eje@gmail.com";
@@ -35,10 +39,6 @@ function App() {
 
   const [characters, setCharacters] = useState([]);
   // console.log(characters)
-  const [title, setTitle] = useState("Bienvenidos");
-  const seteandoTitle = (str) => {
-    setTitle(str);
-  };
 
   function onSearch(id) {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
@@ -56,10 +56,11 @@ function App() {
   function onClose(id) {
     const newCharacters = characters.filter((ch) => ch.id !== Number(id));
     setCharacters(newCharacters);
+    removeFav(Number(id));
   }
 
   const { pathname } = useLocation();
-  console.log(":::::", pathname.split("/"));
+  // console.log(":::::", pathname.split("/"));
 
   useEffect(() => {
     const requests = [];
@@ -75,7 +76,7 @@ function App() {
         results.map(
           (chars) => (newCharacters = [...newCharacters, ...chars.data.results])
         );
-        console.log(":::", newCharacters);
+        // console.log(":::", newCharacters);
         setCharacters([...newCharacters]);
         //TODO: para cuando llevemos los characters al store (state global) de redux
         // dispatch(addCharacter(newCharacters))
@@ -94,14 +95,13 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route
           path="/home"
-          element={
-            <Cards
-              characters={characters}
-              onClose={onClose}
-              seteandoTitle={seteandoTitle}
-            />
-          }
+          element={<Cards characters={characters} onClose={onClose} />}
         ></Route>
+        <Route
+          path="/favorites"
+          element={<Favorites onClose={onClose} />}
+        ></Route>
+
         <Route path="/detail/:id" element={<Detail />}></Route>
         {/* desde el Link -> /detail/algoMas */}
         {/* --> params => {id:undefined} -->next desde el Link le damos el value =>  {id:algoMas} */}
@@ -117,4 +117,15 @@ function App() {
   );
 }
 
-export default App;
+function mapDispatch(dispatch) {
+  return {
+    addFav: function (char) {
+      dispatch(addFav(char));
+    },
+    removeFav: function (id) {
+      dispatch(removeFav(id));
+    },
+  };
+}
+
+export default connect(null, mapDispatch)(App);

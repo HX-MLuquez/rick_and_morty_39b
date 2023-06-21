@@ -17,7 +17,7 @@ export default function Login({ login }) {
     password: "",
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const validate = (inputs) => {
     const errors = {};
