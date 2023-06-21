@@ -23,7 +23,7 @@ export default function Card({ char, onClose, seteandoTitle }) {
         <button onClick={() => onClose(id)}>X</button>
       </div>
       <div className={style.info}>
-        <Link to={`/detail/${id}`}>
+        <Link className={style.link} to={`/detail/${id}`}>
           <h2>{name}</h2>
           {/* <h2>{status}</h2> */}
           <h2>{species}</h2>

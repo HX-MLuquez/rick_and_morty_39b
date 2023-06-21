@@ -71,7 +71,7 @@ export default function Login({ login }) {
     (
       <div className={style.login}>
         <form onSubmit={handleSubmit}>
-          <h1>Bienvenidos!!!</h1>
+          <h1>Rick & Morty</h1>
           <div className={style.inputs}>
             <label>Email: </label>
             <input

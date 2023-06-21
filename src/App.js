@@ -45,8 +45,8 @@ function App() {
       ({ data }) => {
         if (data.name) {
           const char = characters.find((ch) => ch.id === Number(id));
-          if (char) return alert("ese characters ya existe");
-          setCharacters((oldChars) => [...oldChars, data]);
+          if (char) return alert(`Ese characters id: ${id}, ya existe`);
+          setCharacters((oldChars) => [data, ...oldChars]);
         } else {
           window.alert("¡No hay personajes con este ID!");
         }
@@ -61,41 +61,59 @@ function App() {
   const { pathname } = useLocation();
   console.log(":::::", pathname.split("/"));
 
-  return (
-    console.log("access <<<>>>>>> ", access),
-    (
-      <>
-        {/* <h1>{title}</h1> */}
-        {pathname === "/" ? null : (
-          <NavBar logout={logout} onSearch={onSearch} />
-        )}
+  useEffect(() => {
+    const requests = [];
+    for (let num = 22; num < 24; num++) {
+      requests.push(
+        axios.get(`https://rickandmortyapi.com/api/character?page=${num}`)
+      );
+    }
+    Promise.all(requests)
+      .then((results) => {
+        // console.log(":::", results);
+        let newCharacters = [];
+        results.map(
+          (chars) => (newCharacters = [...newCharacters, ...chars.data.results])
+        );
+        console.log(":::", newCharacters);
+        setCharacters([...newCharacters]);
+        //TODO: para cuando llevemos los characters al store (state global) de redux
+        // dispatch(addCharacter(newCharacters))
+      })
+      .catch((error) => {});
+  }, []);
 
-        <Routes>
-          <Route path="/" element={<Login login={login} />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route
-            path="/home"
-            element={
-              <Cards
-                characters={characters}
-                onClose={onClose}
-                seteandoTitle={seteandoTitle}
-              />
-            }
-          ></Route>
-          <Route path="/detail/:id" element={<Detail />}></Route>
-          {/* desde el Link -> /detail/algoMas */}
-          {/* --> params => {id:undefined} -->next desde el Link le damos el value =>  {id:algoMas} */}
-          <Route path="*" element={<ErrorNotFound />}></Route>
-        </Routes>
-        {/* {pathname !== "/" &&
+  return (
+    // console.log("access <<<>>>>>> ", access),
+    <>
+      {/* <h1>{title}</h1> */}
+      {pathname === "/" ? null : <NavBar logout={logout} onSearch={onSearch} />}
+
+      <Routes>
+        <Route path="/" element={<Login login={login} />}></Route>
+        <Route path="/about" element={<About />}></Route>
+        <Route
+          path="/home"
+          element={
+            <Cards
+              characters={characters}
+              onClose={onClose}
+              seteandoTitle={seteandoTitle}
+            />
+          }
+        ></Route>
+        <Route path="/detail/:id" element={<Detail />}></Route>
+        {/* desde el Link -> /detail/algoMas */}
+        {/* --> params => {id:undefined} -->next desde el Link le damos el value =>  {id:algoMas} */}
+        <Route path="*" element={<ErrorNotFound />}></Route>
+      </Routes>
+      {/* {pathname !== "/" &&
       pathname !== "/home" &&
       pathname !== "/about" &&
       pathname.split("/")[1] !== `detail` ? (
         <ErrorNotFound />
       ) : null} */}
-      </>
-    )
+    </>
   );
 }
 

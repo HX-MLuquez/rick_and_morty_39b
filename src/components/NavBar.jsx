@@ -12,10 +12,10 @@ export default function NavBar({ onSearch, logout }) {
         <div>LogOut</div>
       </Link> */}
 
-      <Link to={"/home"}>
+      <Link className={style.link} to={"/home"}>
         <div>Home</div>
       </Link>
-      <Link to={"/about"}>
+      <Link className={style.link} to={"/about"}>
         <div>About</div>
       </Link>
       <SearchBar onSearch={onSearch} />

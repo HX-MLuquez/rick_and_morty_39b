@@ -29,6 +29,11 @@
 }
 .info{
   text-align: center;
+
+}
+.link{
+  text-decoration: none;
+  color: rgb(17, 15, 15);
 }
 .info img{
   border-radius: 40px;

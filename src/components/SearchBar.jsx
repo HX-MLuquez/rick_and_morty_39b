@@ -21,7 +21,7 @@ export default function SearchBar({ onSearch }) {
   return (
     // console.log("id--->", id),
     <div className={style.search}>
-      <label>Insert to Id: </label>
+      <label>Insert ID: </label>
       <input
         type="search"
         onChange={handleChange}

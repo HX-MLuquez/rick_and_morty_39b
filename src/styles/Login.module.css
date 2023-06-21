@@ -17,7 +17,7 @@
   border: 1px rgb(168, 167, 167) solid;
 }
 
-.login button {
+/* .login button {
   background-color: rgb(61, 166, 246);
   border: 1.5px rebeccapurple solid;
   border-radius: 4px;
@@ -28,7 +28,7 @@
 .login button:hover {
   background-color: rgb(91, 179, 247);
   border: 1.5px rgb(86, 32, 140) solid;
-}
+} */
 .login span {
     color: red;
 }
