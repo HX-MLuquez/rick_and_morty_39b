@@ -12,14 +12,16 @@ import Detail from "./components/Detail";
 import ErrorNotFound from "./components/ErrorNotFound";
 import Favorites from "./components/Favorites";
 
-import { connect } from "react-redux";
-import { addFav, removeFav } from "./redux/actions";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { addFav, removeFav, addChar, removeChar } from "./redux/actions";
 
-function App({ removeFav }) {
+export default function App() {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
   const EMAIL = "eje@gmail.com";
   const PASSWORD = "@123QWEasd";
+
+  const dispatch = useDispatch();
 
   function login(inputs) {
     if (inputs.password === PASSWORD && inputs.email === EMAIL) {
@@ -37,16 +39,16 @@ function App({ removeFav }) {
     navigate("/");
   }
 
-  const [characters, setCharacters] = useState([]);
+  // const [characters, setCharacters] = useState([]);
   // console.log(characters)
-
+ const {characters} = useSelector((state)=>state)
   function onSearch(id) {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
       ({ data }) => {
         if (data.name) {
           const char = characters.find((ch) => ch.id === Number(id));
           if (char) return alert(`Ese characters id: ${id}, ya existe`);
-          setCharacters((oldChars) => [data, ...oldChars]);
+          dispatch(addChar(data));
         } else {
           window.alert("¡No hay personajes con este ID!");
         }
@@ -54,9 +56,8 @@ function App({ removeFav }) {
     );
   }
   function onClose(id) {
-    const newCharacters = characters.filter((ch) => ch.id !== Number(id));
-    setCharacters(newCharacters);
-    removeFav(Number(id));
+    dispatch(removeChar(Number(id)));
+    dispatch(removeFav(Number(id)));
   }
 
   const { pathname } = useLocation();
@@ -77,7 +78,7 @@ function App({ removeFav }) {
           (chars) => (newCharacters = [...newCharacters, ...chars.data.results])
         );
         // console.log(":::", newCharacters);
-        setCharacters([...newCharacters]);
+        dispatch(addChar([...newCharacters]));
         //TODO: para cuando llevemos los characters al store (state global) de redux
         // dispatch(addCharacter(newCharacters))
       })
@@ -95,7 +96,7 @@ function App({ removeFav }) {
         <Route path="/about" element={<About />}></Route>
         <Route
           path="/home"
-          element={<Cards characters={characters} onClose={onClose} />}
+          element={<Cards onClose={onClose} />}
         ></Route>
         <Route
           path="/favorites"
@@ -117,15 +118,15 @@ function App({ removeFav }) {
   );
 }
 
-function mapDispatch(dispatch) {
-  return {
-    addFav: function (char) {
-      dispatch(addFav(char));
-    },
-    removeFav: function (id) {
-      dispatch(removeFav(id));
-    },
-  };
-}
+// function mapDispatch(dispatch) {
+//   return {
+//     addFav: function (char) {
+//       dispatch(addFav(char));
+//     },
+//     removeFav: function (id) {
+//       dispatch(removeFav(id));
+//     },
+//   };
+// }
 
-export default connect(null, mapDispatch)(App);
+// export default connect(null, mapDispatch)(App);

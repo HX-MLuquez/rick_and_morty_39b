@@ -1,18 +1,60 @@
-import {ADD_FAV, REMOVE_FAV} from './actionType'
+import { ADD_FAV, REMOVE_FAV, ADD_CHAR, REMOVE_CHAR, FILTER, RESET, FILTER_A_Z,PREV, NEXT } from "./actionType";
 
+export function addChar(char) {
+  return {
+    type: ADD_CHAR,
+    payload: char,
+  };
+}
+export function removeChar(id) {
+  return {
+    type: REMOVE_CHAR,
+    payload: id,
+  };
+}
+export function addFav(char) {
+  return {
+    type: ADD_FAV,
+    payload: char,
+  };
+}
+export function removeFav(id) {
+  return {
+    type: REMOVE_FAV,
+    payload: id,
+  };
+}
+export function filterGender(gender) {
+    return {
+      type: FILTER,
+      payload: gender,
+    };
+  }
+  export function filterAtoZ(aOz) {
+    return {
+      type: FILTER_A_Z,
+      payload: aOz,
+    };
+  }
 
-export function addFav(char){
-    return{
-        type: ADD_FAV,
-        payload: char
-    }
-}
-export function removeFav(id){
-    return{
-        type: REMOVE_FAV,
-        payload: id
-    }
-}
+  export function reset() {
+    return {
+      type: RESET,
+    };
+  }
+
+  export function prev() {
+    return {
+      type: PREV,
+    };
+  }
+  export function next() {
+    return {
+      type: NEXT,
+    };
+  }
+// filterCards: esta función recibe por parámetro un gender. Debe retornar 
+// una action con el type igual a "FILTER" y el payload será igual al parámetro recibido.
 /*
 addFav: esta función recibe un personaje por parámetro. 
 Deberás retornar una action con el type igual a "ADD_FAV", 
