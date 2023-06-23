@@ -10,6 +10,8 @@ export const FILTER_A_Z = "FILTER_A_Z"
 export const PREV = "PREV"
 export const NEXT = "NEXT"
 
+export const CREATE_CHAR = "CREATE_CHAR"
+
 
 /*
 addFav: esta función recibe un personaje por parámetro. 

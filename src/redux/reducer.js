@@ -8,6 +8,7 @@ import {
   FILTER_A_Z,
   PREV,
   NEXT,
+  CREATE_CHAR,
 } from "./actionType";
 
 const initialState = {
@@ -25,7 +26,7 @@ export default function reducer(state = initialState, { type, payload }) {
       if (Array.isArray(payload)) {
         return {
           ...state,
-          characters: [...state.characters, ...payload],
+          characters: [...payload],
         };
       }
 
@@ -46,6 +47,11 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         myFavorites: [payload, ...state.myFavorites],
         allFavorites: [payload, ...state.myFavorites],
+      };
+    case CREATE_CHAR:
+      return {
+        ...state,
+        characters: [payload, ...state.characters],
       };
     case REMOVE_FAV:
       const newFavorites = state.myFavorites.filter((ch) => {

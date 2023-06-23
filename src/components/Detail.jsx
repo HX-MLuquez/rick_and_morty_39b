@@ -2,24 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import style from '../styles/Detail.module.css'
+import style from "../styles/Detail.module.css";
+import { useSelector } from "react-redux";
 
 export default function Detail() {
   const { id } = useParams();
   const [character, setCharacter] = useState({});
+  const { characters } = useSelector((s) => s);
   // console.log("--->", id)
   //TODO: MOUNT <-> upDate ID
   useEffect(() => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {
-          setCharacter(data);
-        } else {
-          window.alert("No hay personajes con ese ID");
-        }
-      }
-    );
-    return setCharacter({});
+    // axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    //   ({ data }) => {
+    //     if (data.name) {
+    //       setCharacter(data);
+    //     } else {
+    //       window.alert("No hay personajes con ese ID");
+    //     }
+    //   }
+    // );
+    const char = characters?.find((ch) => ch.id === Number(id));
+    if (char) setCharacter(char);
+    else window.alert("No hay personajes con ese ID");
+    // return setCharacter({});
   }, [id]);
   return (
     console.log("char:", character),

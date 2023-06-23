@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, ADD_CHAR, REMOVE_CHAR, FILTER, RESET, FILTER_A_Z,PREV, NEXT } from "./actionType";
+import { ADD_FAV, REMOVE_FAV, ADD_CHAR, REMOVE_CHAR, FILTER, RESET, FILTER_A_Z,PREV, NEXT, CREATE_CHAR } from "./actionType";
 
 export function addChar(char) {
   return {
@@ -53,6 +53,16 @@ export function filterGender(gender) {
       type: NEXT,
     };
   }
+
+  export function createCharacter(character) {
+    return {
+      type: CREATE_CHAR,
+      payload: character
+    };
+  }
+
+
+  
 // filterCards: esta función recibe por parámetro un gender. Debe retornar 
 // una action con el type igual a "FILTER" y el payload será igual al parámetro recibido.
 /*

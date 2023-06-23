@@ -21,6 +21,9 @@ export default function NavBar({ onSearch, logout }) {
       <Link className={style.link} to={"/favorites"}>
         <div>Favorites</div>
       </Link>
+      <Link className={style.link} to={"/create"}>
+        <div>Create</div>
+      </Link>
       <SearchBar onSearch={onSearch} />
     </div>
   );

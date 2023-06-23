@@ -60,7 +60,7 @@ function Card({
       </div>
       <div className={style.info}>
         <Link className={style.link} to={`/detail/${id}`}>
-          <h2>{name}</h2>
+          <h2>{name.slice(0,16)}</h2>
           {/* <h2>{status}</h2> */}
           <h2>{species}</h2>
           {/* <h2>{gender}</h2>

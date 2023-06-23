@@ -14,6 +14,7 @@ import Favorites from "./components/Favorites";
 
 import { connect, useDispatch, useSelector } from "react-redux";
 import { addFav, removeFav, addChar, removeChar } from "./redux/actions";
+import CreateCharacter from "./components/CreateCharacter";
 
 export default function App() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function App() {
 
   // const [characters, setCharacters] = useState([]);
   // console.log(characters)
- const {characters} = useSelector((state)=>state)
+  const { characters } = useSelector((state) => state);
   function onSearch(id) {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
       ({ data }) => {
@@ -94,15 +95,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Login login={login} />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route
-          path="/home"
-          element={<Cards onClose={onClose} />}
-        ></Route>
+        <Route path="/home" element={<Cards onClose={onClose} />}></Route>
         <Route
           path="/favorites"
           element={<Favorites onClose={onClose} />}
         ></Route>
-
+        <Route path="/create" element={<CreateCharacter />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
         {/* desde el Link -> /detail/algoMas */}
         {/* --> params => {id:undefined} -->next desde el Link le damos el value =>  {id:algoMas} */}
